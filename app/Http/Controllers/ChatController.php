@@ -42,9 +42,18 @@ class ChatController extends Controller
             $chat->admins = $admins;
             $chat->name = $targetUser->name;
             $chat->owner = auth()->user()->id;
+            $chat->who = $targetUser->name;
             $chat->save();
         }
+
+        $chat->participant = $this->whoIs($targetUser->uuid);
+        
         return response()->json($chat);
+    }
+
+    public function whoIs($uuid){
+        $user = User::where('uuid', $uuid)->first();
+        return $user->name;
     }
 
     public function sendMessage($pcode, Request $request){

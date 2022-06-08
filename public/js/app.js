@@ -5342,6 +5342,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['userData'],
   data: function data() {
@@ -5619,7 +5623,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   cluster: "mt1",
   wsHost: window.location.hostname,
   wsPort: 6001,
-  forceTLS: false,
+  forceTLS: true,
   disableStats: true
 });
 
@@ -34786,69 +34790,82 @@ var render = function () {
       _vm.activeChat !== null
         ? _c("div", { staticClass: "card col-9 h-100 ms-auto" }, [
             _c("div", { staticClass: "card-body" }, [
-              _vm.nameEditing == false
+              _vm.activeChat.participants.length > 2
                 ? _c("div", [
-                    _c(
-                      "h5",
-                      {
-                        staticStyle: { cursor: "pointer" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.nameEditor(true)
-                          },
-                        },
-                      },
-                      [
-                        _vm._v(_vm._s(_vm.activeChat.name) + " "),
-                        _vm.userTyping == true
-                          ? _c("p", { staticClass: "float-end" }, [
-                              _vm._v("typing..."),
-                            ])
-                          : _vm._e(),
-                      ]
-                    ),
+                    _vm.nameEditing == false
+                      ? _c("div", [
+                          _c(
+                            "h5",
+                            {
+                              staticStyle: { cursor: "pointer" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.nameEditor(true)
+                                },
+                              },
+                            },
+                            [
+                              _vm._v(_vm._s(_vm.activeChat.name) + " "),
+                              _vm.userTyping == true
+                                ? _c("p", { staticClass: "float-end" }, [
+                                    _vm._v("typing..."),
+                                  ])
+                                : _vm._e(),
+                            ]
+                          ),
+                        ])
+                      : _c("div", [
+                          _c("h5", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.activeChat.name,
+                                  expression: "activeChat.name",
+                                },
+                              ],
+                              ref: "textFieldForName",
+                              staticClass:
+                                "w-75 d-inline border-0 shadow-none text-dark",
+                              domProps: { value: _vm.activeChat.name },
+                              on: {
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.activeChat,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "float-end d-inline",
+                                staticStyle: { cursor: "pointer" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.nameEditor(false)
+                                  },
+                                },
+                              },
+                              [_vm._v("done")]
+                            ),
+                          ]),
+                        ]),
                   ])
                 : _c("div", [
                     _c("h5", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.activeChat.name,
-                            expression: "activeChat.name",
-                          },
-                        ],
-                        ref: "textFieldForName",
-                        staticClass:
-                          "w-75 d-inline border-0 shadow-none text-dark",
-                        domProps: { value: _vm.activeChat.name },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.activeChat,
-                              "name",
-                              $event.target.value
-                            )
-                          },
-                        },
-                      }),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "float-end d-inline",
-                          staticStyle: { cursor: "pointer" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.nameEditor(false)
-                            },
-                          },
-                        },
-                        [_vm._v("done")]
-                      ),
+                      _vm._v(_vm._s(_vm.activeChat.participant) + " "),
+                      _vm.userTyping == true
+                        ? _c("p", { staticClass: "float-end" }, [
+                            _vm._v("typing..."),
+                          ])
+                        : _vm._e(),
                     ]),
                   ]),
               _vm._v(" "),

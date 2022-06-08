@@ -23,7 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/search', [App\Http\Controllers\ChatController::class, 'search'])->name('search');
 Route::get('/intiate-chat', [App\Http\Controllers\ChatController::class, 'singlePersonChat'])->name('singlePersonChat');
 Route::get('/fetch-user-chats', [App\Http\Controllers\ChatController::class, 'fetchUserChats'])->name('fetchUserChats');
-
+Route::get('/who-is', [App\Http\Controllers\ChatController::class, 'whoIs'])->name('userFinder');
 /**
  * Chat And Actions
  */

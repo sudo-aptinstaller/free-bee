@@ -24,12 +24,16 @@
             </div>
             <div class="card col-9 h-100 ms-auto" v-if="activeChat !== null">
                 <div class="card-body">
-                    <div v-if="nameEditing == false">
-                        
-                        <h5 @click="nameEditor(true)" style="cursor:pointer">{{activeChat.name}} <p class="float-end" v-if="userTyping == true">typing...</p></h5>
+                    <div v-if="activeChat.participants.length > 2">
+                        <div v-if="nameEditing == false">
+                            <h5 @click="nameEditor(true)" style="cursor:pointer">{{activeChat.name}} <p class="float-end" v-if="userTyping == true">typing...</p></h5>
+                        </div>
+                        <div v-else>
+                            <h5><input ref="textFieldForName" class="w-75 d-inline border-0 shadow-none text-dark" v-model="activeChat.name"><span class="float-end d-inline" style="cursor:pointer" @click="nameEditor(false)">done</span></h5>
+                        </div>
                     </div>
                     <div v-else>
-                        <h5><input ref="textFieldForName" class="w-75 d-inline border-0 shadow-none text-dark" v-model="activeChat.name"><span class="float-end d-inline" style="cursor:pointer" @click="nameEditor(false)">done</span></h5>
+                        <h5>{{activeChat.participant}} <p class="float-end" v-if="userTyping == true">typing...</p></h5>
                     </div>
                     <hr>
                     <div style="min-height:75vh;margin-bottom:50px;max-height:75vh;overflow-y:scroll;-ms-overflow-style: none;scrollbar-width: none;" v-chat-scroll="{always: false, smooth: true}">
